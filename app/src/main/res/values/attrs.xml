@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Divider">
+        <attr name="dividerStrokeWidth" format="integer" />
+        <attr name="dividerColor" format="color" />
+        <attr name="dividerOrientation" format="enum">
+            <enum name="vertical" value="1"/>
+            <enum name="horizontal" value="2"/>
+        </attr>
+    </declare-styleable>
+</resources>
