@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#AFA655"
+    tools:context=".customview.CustomViewGroupShowerFragment">
+
+    <com.bpapps.viewgrouptest.customview.SquareLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTOP_START"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#5396CC"
+            android:text="T_START"
+            app:layout_position="TOP_START" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTOP_END"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#5396CC"
+            android:text="TOP_END"
+            app:layout_position="TOP_END" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBOTTOM_END"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#5396CC"
+            android:text="BOTTOM_END"
+            app:layout_position="BOTTOM_END" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBOTTOM_START"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#5396CC"
+            android:text="BOTTOM_START"
+            app:layout_position="BOTTOM_START" />
+    </com.bpapps.viewgrouptest.customview.SquareLayout>
+
+</FrameLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.bpapps.viewgrouptest.customview.Divider
+        android:id="@+id/divider1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:dividerColor="#930808"
+        app:dividerOrientation="horizontal"
+        app:dividerStrokeWidth="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.bpapps.viewgrouptest.customview.Divider
+        android:id="@+id/divider2"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        app:dividerColor="#2196F3"
+        app:dividerOrientation="vertical"
+        app:dividerStrokeWidth="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.bpapps.viewgrouptest.customview.Divider
+        android:id="@+id/divider3"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        app:dividerColor="#B20ACF"
+        app:dividerOrientation="vertical"
+        app:dividerStrokeWidth="100"
+        app:layout_constraintBottom_toTopOf="@+id/divider1"
+        app:layout_constraintEnd_toStartOf="@+id/divider2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.bpapps.viewgrouptest.customview.Divider
+        android:id="@+id/divider4"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        app:dividerColor="#FFEB3B"
+        app:dividerOrientation="vertical"
+        app:dividerStrokeWidth="10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/divider2"
+        app:layout_constraintTop_toBottomOf="@+id/divider1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

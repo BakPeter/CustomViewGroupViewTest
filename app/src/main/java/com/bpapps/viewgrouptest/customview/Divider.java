@@ -37,6 +37,7 @@ public class Divider extends View {
         super(context, attrs);
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.Divider, 0, 0);
         mStrokeWidth = dpToPx(a.getInteger(R.styleable.Divider_dividerStrokeWidth, DEFAULT_DIVIDER_WIDTH));
+//        mStrokeWidth = a.getInteger(R.styleable.Divider_dividerStrokeWidth, DEFAULT_DIVIDER_WIDTH));
         mDividerColor = a.getColor(R.styleable.Divider_dividerColor, ContextCompat.getColor(context, R.color.colorPrimary));
         mOrientation = a.getInt(R.styleable.Divider_dividerOrientation, ORIENTATION_HORIZONTAL);
         a.recycle();
@@ -79,5 +80,15 @@ public class Divider extends View {
         final Resources resources = getResources();
         final DisplayMetrics displayMetrics = resources.getDisplayMetrics();
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        if (mOrientation == ORIENTATION_VERTICAL) {
+            setMeasuredDimension(Math.min((int) mStrokeWidth, widthMeasureSpec), heightMeasureSpec);
+        } else {
+//            mOrientation == ORIENTATION_HORIZONTAL
+            setMeasuredDimension(widthMeasureSpec, Math.min((int) mStrokeWidth, heightMeasureSpec));
+        }
     }
 }
