@@ -4,19 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#AFA655"
+    android:background="#A52D2D"
     tools:context=".customview.CustomViewGroupShowerFragment">
+    <!--    android:paddingTop="10dp"-->
+    <!--    android:paddingBottom="15dp"-->
+    <!--    android:paddingRight="25dp"-->
+    <!--    android:paddingLeft="40dp"-->
 
     <com.bpapps.viewgrouptest.customview.SquareLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#AFA655">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTOP_START"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#5396CC"
-            android:text="T_START"
+            android:text="TOP_START"
             app:layout_position="TOP_START" />
 
         <androidx.appcompat.widget.AppCompatTextView

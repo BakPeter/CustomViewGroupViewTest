@@ -84,10 +84,37 @@ public class SquareLayout extends ViewGroup {
         int count = getChildCount();
         int left, right, top, bottom;
 
+//        ViewGroup.MarginLayoutParams lp = (MarginLayoutParams) getLayoutParams();
+//        int marginLeft = lp.leftMargin;
+//        int marginRight = lp.rightMargin;
+//        int marginTop = lp.topMargin;
+//        int marginBottom = lp.bottomMargin;
+
         int paddingLeft = getPaddingLeft();
         int paddingRight = getPaddingRight();
         int paddingTop = getPaddingTop();
         int paddingBottom = getPaddingBottom();
+
+//        int marginLeft = 0;
+//        int marginRight = 0;
+//        int marginTop = 0;
+//        int marginBottom = 0;
+//        ViewParent parent = getParent();
+//        if (parent instanceof View) {
+//            View parentView = (View) parent;
+//
+//            paddingLeft += parentView.getPaddingLeft();
+//            paddingRight += parentView.getPaddingRight();
+//            paddingTop += parentView.getPaddingTop();
+//            paddingBottom += parentView.getPaddingBottom();
+//
+//            ViewGroup.MarginLayoutParams lpParent = (MarginLayoutParams) parentView.getLayoutParams();
+//            marginLeft += lpParent.leftMargin;
+//            marginRight += lpParent.rightMargin;
+//            marginTop += lpParent.topMargin;
+//            marginBottom += lpParent.bottomMargin;
+//        }
+
         int childWidth, childHeight;
 
         for (int i = 0; i < count; i++) {
@@ -96,22 +123,28 @@ public class SquareLayout extends ViewGroup {
             childHeight = child.getMeasuredHeight();
 
             if (child.getVisibility() != GONE) {
-                LayoutParams lp = (LayoutParams) child.getLayoutParams();
+                LayoutParams lpChild = (LayoutParams) child.getLayoutParams();
 
-                switch (lp.position) {
+                switch (lpChild.position) {
                     case TOP_START:
+//                        left = l + paddingLeft + marginLeft;
+//                        top = t + paddingTop + marginTop;
                         left = l + paddingLeft;
                         top = t + paddingTop;
                         right = left + childWidth;
                         bottom = top + childHeight;
                         break;
                     case TOP_END:
+//                        left = r - paddingRight - marginRight - childWidth;
+//                        top = t + paddingTop + marginTop;
                         left = r - paddingRight - childWidth;
                         top = t + paddingTop;
                         right = left + childWidth;
                         bottom = top + childHeight;
                         break;
                     case BOTTOM_END:
+//                        left = r - paddingRight - marginRight - childWidth;
+//                        top = b - paddingBottom - marginBottom - childHeight;
                         left = r - paddingRight - childWidth;
                         top = b - paddingBottom - childHeight;
                         right = left + childWidth;
@@ -119,6 +152,8 @@ public class SquareLayout extends ViewGroup {
                         break;
                     case BOTTOM_START:
                     default:
+//                        left = l + paddingLeft + marginLeft;
+//                        top = b - paddingBottom - marginBottom - childHeight;
                         left = l + paddingLeft;
                         top = b - paddingBottom - childHeight;
                         right = left + childWidth;
