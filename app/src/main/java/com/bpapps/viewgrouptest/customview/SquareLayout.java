@@ -3,9 +3,11 @@ package com.bpapps.viewgrouptest.customview;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -17,6 +19,13 @@ import com.bpapps.viewgrouptest.R;
 public class SquareLayout extends ViewGroup {
 
     int[] viewsPositions = new int[]{0, 0, 0, 0,};
+
+    //    /**
+//     * These are used for computing child frames based on their gravity.
+//     */
+    private final Rect mTmpContainerRect = new Rect();
+    private final Rect mTmpChildRect = new Rect();
+
 
 //    private AppCompatTextView mTvStartTop;
 //    private AppCompatTextView mTvEndTop;
@@ -100,9 +109,13 @@ public class SquareLayout extends ViewGroup {
 //        int marginTop = 0;
 //        int marginBottom = 0;
 //        ViewParent parent = getParent();
+//        int parentWidth;
+//        int parentHeight;
 //        if (parent instanceof View) {
 //            View parentView = (View) parent;
-//
+//            parentWidth = parentView.getMeasuredWidth();
+//            parentHeight = parentView.getMeasuredHeight();
+////
 //            paddingLeft += parentView.getPaddingLeft();
 //            paddingRight += parentView.getPaddingRight();
 //            paddingTop += parentView.getPaddingTop();
@@ -119,48 +132,82 @@ public class SquareLayout extends ViewGroup {
 
         for (int i = 0; i < count; i++) {
             View child = getChildAt(i);
-            childWidth = child.getMeasuredWidth();
-            childHeight = child.getMeasuredHeight();
+
 
             if (child.getVisibility() != GONE) {
+                childWidth = child.getMeasuredWidth();
+                childHeight = child.getMeasuredHeight();
+
                 LayoutParams lpChild = (LayoutParams) child.getLayoutParams();
+                int marginLeft = lpChild.leftMargin;
+                int marginRight = lpChild.rightMargin;
+                int marginTop = lpChild.topMargin;
+                int marginBottom = lpChild.bottomMargin;
 
                 switch (lpChild.position) {
                     case TOP_START:
+//                        mTmpContainerRect.left = l + paddingLeft;
+//                        mTmpContainerRect.top = t + paddingTop;
+//                        mTmpContainerRect.right = mTmpChildRect.left + childWidth;
+//                        mTmpContainerRect.bottom = mTmpContainerRect.top + childHeight;
+
 //                        left = l + paddingLeft + marginLeft;
 //                        top = t + paddingTop + marginTop;
-                        left = l + paddingLeft;
-                        top = t + paddingTop;
+                        left = l + paddingLeft + marginLeft;
+                        top = t + paddingTop + marginTop;
                         right = left + childWidth;
                         bottom = top + childHeight;
                         break;
                     case TOP_END:
+//                        mTmpContainerRect.left = r - paddingRight;
+//                        mTmpContainerRect.top = t + paddingTop;
+//                        mTmpContainerRect.right = mTmpChildRect.left + childWidth;
+//                        mTmpContainerRect.bottom = mTmpContainerRect.top + childHeight;
+
 //                        left = r - paddingRight - marginRight - childWidth;
 //                        top = t + paddingTop + marginTop;
-                        left = r - paddingRight - childWidth;
-                        top = t + paddingTop;
+                        left = r - paddingRight - -marginRight - childWidth;
+                        top = t + paddingTop + marginTop;
                         right = left + childWidth;
                         bottom = top + childHeight;
                         break;
                     case BOTTOM_END:
+//                        mTmpContainerRect.left = r - paddingRight;
+//                        mTmpContainerRect.top = b - paddingBottom - childHeight;
+//                        mTmpContainerRect.right = mTmpChildRect.left + childWidth;
+//                        mTmpContainerRect.bottom = mTmpContainerRect.top + childHeight;
+
 //                        left = r - paddingRight - marginRight - childWidth;
 //                        top = b - paddingBottom - marginBottom - childHeight;
-                        left = r - paddingRight - childWidth;
-                        top = b - paddingBottom - childHeight;
+                        left = r - paddingRight - marginRight - childWidth;
+                        top = b - paddingBottom - marginBottom - childHeight;
                         right = left + childWidth;
                         bottom = top + childHeight;
                         break;
                     case BOTTOM_START:
                     default:
+//                        mTmpContainerRect.left = l + paddingLeft;
+//                        mTmpContainerRect.top = b - paddingBottom - childHeight;
+//                        mTmpContainerRect.right = mTmpChildRect.left + childWidth;
+//                        mTmpContainerRect.bottom = mTmpContainerRect.top + childHeight;
+
 //                        left = l + paddingLeft + marginLeft;
 //                        top = b - paddingBottom - marginBottom - childHeight;
-                        left = l + paddingLeft;
-                        top = b - paddingBottom - childHeight;
+                        left = l + paddingLeft + marginLeft;
+                        top = b - paddingBottom - marginBottom - childHeight;
                         right = left + childWidth;
                         bottom = top + childHeight;
                         break;
                 }
 
+                // Use the child's gravity and size to determine its final
+//                // frame within its container.
+//                mTmpContainerRect.left = l + paddingLeft;
+//                mTmpContainerRect.top = b - paddingBottom - childHeight;
+//                mTmpContainerRect.right = mTmpChildRect.left + childWidth;
+//                mTmpContainerRect.bottom = mTmpContainerRect.top + childHeight;
+//                Gravity.apply(lpChild.gravity, childWidth, childHeight, mTmpContainerRect, mTmpChildRect);
+//                child.layout(mTmpChildRect.left, mTmpChildRect.top, mTmpChildRect.right, mTmpChildRect.bottom);
                 child.layout(left, top, right, bottom);
             }
         }
@@ -232,6 +279,7 @@ public class SquareLayout extends ViewGroup {
     public static class LayoutParams extends MarginLayoutParams {
 
         public LayoutPositions position;
+        public int gravity = Gravity.TOP | Gravity.START;
 
         public LayoutParams(Context c, AttributeSet attrs) {
             super(c, attrs);
@@ -242,6 +290,7 @@ public class SquareLayout extends ViewGroup {
             TypedArray a = c.obtainStyledAttributes(attrs, R.styleable.SquareLayout);
             int pos = a.getInt(R.styleable.SquareLayout_layout_position, LayoutPositions.TOP_START.getValue());
             position = LayoutPositions.values()[pos - 1];
+            gravity = a.getInt(R.styleable.SquareLayout_android_layout_gravity, gravity);
             a.recycle();
         }
 
